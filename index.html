@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Actor Identifier — Privacy‑First Safety Reporting</title>
+    <meta name="description" content="Privacy‑first reporting for individuals and controlled sharing for community leaders. Role‑based access; not a background‑check or legal service.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Zoom Theme Variables */
+        :root {
+            --zoom-blue: #2d8cff;
+            --zoom-blue-dark: #0969da;
+            --zoom-gray-50: #f8f9fb;
+            --zoom-gray-100: #f4f5f7;
+            --zoom-gray-200: #e1e3e6;
+            --zoom-gray-300: #d1d5db;
+            --zoom-gray-500: #6b7280;
+            --zoom-gray-700: #374151;
+            --zoom-gray-900: #232333;
+            --zoom-white: #ffffff;
+            --zoom-success: #10b981;
+            --zoom-success-bg: #ecfdf5;
+            --zoom-warning: #f59e0b;
+            --zoom-warning-bg: #fffbeb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--zoom-gray-900);
+            background-color: var(--zoom-gray-100);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--zoom-white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--zoom-gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--zoom-gray-900);
+            text-decoration: none;
+        }
+
+        .beta-badge {
+            background: var(--zoom-warning-bg);
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 12px;
+            border: 1px solid var(--zoom-warning);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--zoom-gray-500);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--zoom-gray-900);
+        }
+
+        .btn-primary {
+            background: var(--zoom-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(45, 140, 255, 0.2);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--zoom-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(45, 140, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--zoom-white);
+            color: var(--zoom-gray-700);
+            border: 1px solid var(--zoom-gray-200);
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--zoom-gray-50);
+            border-color: var(--zoom-gray-300);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--zoom-white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--zoom-gray-900);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--zoom-gray-500);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            color: var(--zoom-gray-500);
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--zoom-gray-900);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--zoom-gray-500);
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--zoom-white);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .problem-card {
+            background: var(--zoom-gray-50);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid var(--zoom-gray-200);
+        }
+
+        .problem-card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .problem-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--zoom-gray-900);
+        }
+
+        .problem-card p {
+            color: var(--zoom-gray-500);
+        }
+
+        /* Solution Section */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .solution-card {
+            background: var(--zoom-white);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--zoom-gray-200);
+            transition: transform 0.2s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .solution-card .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .solution-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--zoom-gray-900);
+        }
+
+        /* Target Users */
+        .users {
+            background: var(--zoom-white);
+        }
+
+        .users-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+
+        .user-card {
+            text-align: center;
+        }
+
+        .user-card .avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--zoom-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 24px;
+            color: white;
+        }
+
+        .user-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--zoom-gray-900);
+        }
+
+        .user-card p {
+            color: var(--zoom-gray-500);
+            margin-bottom: 24px;
+        }
+
+        .user-features {
+            list-style: none;
+            text-align: left;
+            background: var(--zoom-gray-50);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .user-features li {
+            margin-bottom: 8px;
+            color: var(--zoom-gray-700);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Beta Section */
+        .beta {
+            background: linear-gradient(135deg, var(--zoom-blue), var(--zoom-blue-dark));
+            color: white;
+        }
+
+        .beta .section-title,
+        .beta .section-subtitle {
+            color: white;
+        }
+
+        .beta-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .beta-feature {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .beta-feature .icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .beta-feature h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .beta-cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--zoom-blue);
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Trust Section */
+        .trust {
+            background: var(--zoom-white);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .trust-card {
+            text-align: center;
+            padding: 32px;
+            border-radius: 12px;
+            background: var(--zoom-success-bg);
+            border: 1px solid #bbf7d0;
+        }
+
+        .trust-card .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--zoom-success);
+        }
+
+        .trust-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #065f46;
+        }
+
+        .trust-card p {
+            color: #047857;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--zoom-gray-900);
+            color: white;
+            padding: 60px 0 32px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--zoom-gray-300);
+            margin-bottom: 24px;
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--zoom-gray-300);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--zoom-gray-700);
+            padding-top: 32px;
+            text-align: center;
+            color: var(--zoom-gray-300);
+        }
+
+                /* Responsive Design */
+        
+        /* Tablet (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .problem-grid,
+            .solution-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 24px;
+            }
+            
+            .beta-features {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Mobile (max-width: 768px) */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            /* Header adjustments */
+            .nav-links {
+                display: none;
+            }
+            
+            .header .container {
+                padding: 12px 16px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .beta-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+                margin-left: 8px;
+            }
+
+            /* Hero section */
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+                line-height: 1.1;
+            }
+
+            .hero .subtitle {
+                font-size: 16px;
+                margin-bottom: 24px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .btn-primary,
+            .btn-secondary,
+            .btn-white {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 14px 24px;
+            }
+            
+            .trust-indicators {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            /* Sections */
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 28px;
+                line-height: 1.2;
+            }
+            
+            .section-subtitle {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+
+            /* Problem and solution grids */
+            .problem-grid,
+            .solution-grid,
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 32px;
+            }
+            
+            .problem-card,
+            .solution-card,
+            .trust-card {
+                padding: 24px;
+            }
+            
+            .problem-card .icon {
+                font-size: 36px;
+            }
+
+            /* Users section */
+            .users-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .user-card .avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+            
+            .user-card h3 {
+                font-size: 20px;
+            }
+            
+            .user-features {
+                padding: 16px;
+            }
+
+            /* Beta section */
+            .beta {
+                padding: 50px 0;
+            }
+            
+            .beta-features {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-top: 32px;
+            }
+            
+            .beta-feature {
+                padding: 20px;
+            }
+            
+            .beta-cta {
+                margin-top: 32px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 40px 0 24px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-bottom: 32px;
+            }
+            
+            .footer-brand h3 {
+                font-size: 20px;
+            }
+            
+            .footer-brand p {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+        }
+
+        /* Small mobile (max-width: 480px) */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .problem-card,
+            .solution-card,
+            .trust-card,
+            .beta-feature {
+                padding: 20px;
+            }
+            
+            .user-card .avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div style="display: flex; align-items: center;">
+                <a href="#" class="logo">Bad Actor Identifier</a>
+                <span class="beta-badge">BETA</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#problem">The Problem</a>
+                <a href="#solution">Solution</a>
+                <a href="#beta">Join Beta</a>
+                <a href="https://app.badactoridentifier.com" class="btn-primary">
+                    Launch App →
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Help Make Communities Safer</h1>
+            <p class="subtitle">
+                Privacy‑first reporting for individuals and controlled sharing for community leaders.
+            </p>
+            <div class="hero-cta">
+                <a href="https://app.badactoridentifier.com" class="btn-primary">Launch App →</a>
+                <a href="https://app.badactoridentifier.com" class="btn-secondary">File a Report</a>
+            </div>
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <span>🔒</span>
+                    <span>Privacy‑First Reporting</span>
+                </div>
+                <div class="trust-item">
+                    <span>🛡️</span>
+                    <span>Role‑Based Access</span>
+                </div>
+                <div class="trust-item">
+                    <span>🌐</span>
+                    <span>Trusted Sharing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section problem">
+        <div class="container">
+            <h2 class="section-title">The Problem Communities Face</h2>
+            <p class="section-subtitle">
+                Bad actors exploit the silence between communities, causing repeated harm while leaders struggle to warn each other.
+            </p>
+            <div class="problem-grid">
+                        <div class="problem-card">
+                            <div class="icon">😰</div>
+                            <h3>Fear of Blowback</h3>
+                            <p>Community leaders, witnesses, and victims are afraid to speak up about problematic behavior due to fear of retaliation, harassment, or legal consequences.</p>
+                        </div>
+                <div class="problem-card">
+                    <div class="icon">🔄</div>
+                    <h3>Community Hopping</h3>
+                    <p>Bad actors jump from community to community, exploiting the lack of information sharing between platforms.</p>
+                </div>
+                        <div class="problem-card">
+                            <div class="icon">🤐</div>
+                            <h3>Isolated Suffering</h3>
+                            <p>Communities and individuals suffer the same problems in isolation, unable to learn from others' experiences or warn each other about repeat offenders.</p>
+                        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section">
+        <div class="container">
+            <h2 class="section-title">How We Break the Silence</h2>
+            <p class="section-subtitle">
+                A secure, anonymous system that protects both reporters and communities while building a safer digital ecosystem.
+            </p>
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="icon">🔐</div>
+                    <h3>Privacy‑First Reporting</h3>
+                    <p>Submit reports without revealing your identity. Our system protects whistleblowers while maintaining accountability.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">✅</div>
+                    <h3>Community Verification</h3>
+                    <p>Multiple independent confirmations create reliable patterns without relying on single sources.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🧠</div>
+                    <h3>Pattern Recognition</h3>
+                    <p>Identify recurring behaviors across communities to spot bad actors before they cause damage.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">⚖️</div>
+                    <h3>Legal Safeguards</h3>
+                    <p>Built-in protections and careful data handling to minimize legal risks for all participants.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Users Section -->
+    <section class="section users">
+        <div class="container">
+            <h2 class="section-title">Built for Individuals and Community Leaders</h2>
+            <p class="section-subtitle">
+                Whether you lead a community or want to contribute to safer spaces, we have tools for you.
+            </p>
+            <div class="users-grid">
+                <div class="user-card">
+                    <div class="avatar">👥</div>
+                    <h3>Community Leaders</h3>
+                    <p>For events, venues, creative collectives, online groups, and digital spaces of all sizes.</p>
+                    <ul class="user-features">
+                        <li>✅ Receive and review reports for your community</li>
+                        <li>✅ See safety signals across approved communities</li>
+                        <li>✅ Audit trails for sensitive actions</li>
+                        <li>✅ Invite leaders or communities to onboard</li>
+                        <li>✅ Direct beta support channel</li>
+                    </ul>
+                </div>
+                <div class="user-card">
+                    <div class="avatar">👤</div>
+                    <h3>Individual Members</h3>
+                    <p>Community members who witness concerning behavior and want a private way to share it.</p>
+                    <ul class="user-features">
+                        <li>✅ File privacy‑first reports (optional anonymity)</li>
+                        <li>✅ Report against individuals or communities</li>
+                        <li>✅ Track your report submissions</li>
+                        <li>✅ Participate in multiple communities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beta Section -->
+    <section id="beta" class="section beta">
+        <div class="container">
+            <h2 class="section-title">Join the Beta Launch</h2>
+            <p class="section-subtitle">
+                Be part of building the first cross-community protection network. Your feedback shapes the future of online community safety.
+            </p>
+            <div class="beta-features">
+                <div class="beta-feature">
+                    <div class="icon">🚀</div>
+                    <h4>Early Access</h4>
+                    <p>First access to all features and capabilities as we build them</p>
+                </div>
+                <div class="beta-feature">
+                    <div class="icon">💬</div>
+                    <h4>Direct Feedback</h4>
+                    <p>Direct line to the development team for features and improvements</p>
+                </div>
+                <div class="beta-feature">
+                    <div class="icon">🤝</div>
+                    <h4>Community Building</h4>
+                    <p>Help establish the founding network of protected communities</p>
+                </div>
+                <div class="beta-feature">
+                    <div class="icon">🔧</div>
+                    <h4>Shape the Product</h4>
+                    <p>Your real-world needs drive our development priorities</p>
+                </div>
+            </div>
+            <div class="beta-cta">
+                <a href="https://app.badactoridentifier.com" class="btn-white">
+                    🚀 Launch Beta App
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Safety Section -->
+    <section class="section trust">
+        <div class="container">
+            <h2 class="section-title">Built on Trust & Safety</h2>
+            <p class="section-subtitle">
+                Your security and legal protection are our top priorities. Every feature is designed with safety first.
+            </p>
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <div class="icon">🔒</div>
+                    <h4>Data Protection</h4>
+                    <p>PII hashing, anonymous reporting options, and secure storage protect sensitive information</p>
+                </div>
+                <div class="trust-card">
+                    <div class="icon">⚖️</div>
+                    <h4>Legal Compliance</h4>
+                    <p>Built with legal experts to minimize defamation and liability risks</p>
+                </div>
+                <div class="trust-card">
+                    <div class="icon">🔍</div>
+                    <h4>Verification Process</h4>
+                    <p>Multi-source verification prevents false reports and ensures accuracy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Bad Actor Identifier</h3>
+                    <p>Building safer digital communities through secure, anonymous reporting and cross-community protection networks.</p>
+                    <a href="mailto:info@badactoridentifier.com" class="btn-secondary">
+                        📧 Contact Us
+                    </a>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="https://app.badactoridentifier.com">Launch App</a></li>
+                        <li><a href="#beta">Join Beta</a></li>
+                        <li><a href="#solution">How It Works</a></li>
+                        <li><a href="mailto:info@badactoridentifier.com">Feature Requests</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:info@badactoridentifier.com">Help Center</a></li>
+                        <li><a href="mailto:info@badactoridentifier.com">Contact Support</a></li>
+                        <li><a href="mailto:info@badactoridentifier.com">Beta Feedback</a></li>
+                        <li><a href="mailto:info@badactoridentifier.com">Community Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bad Actor Identifier. Protecting communities through secure, anonymous reporting.</p>
+                <p style="margin-top:8px; color:#cbd5e1; font-size:12px; max-width:900px; margin-left:auto; margin-right:auto;">
+                    Not a background check or legal service. The Platform aggregates user‑submitted reports to help communities improve safety. We do not
+                    guarantee verification of all content, and nothing on this site constitutes legal advice. If you
+                    provide a name or email to invite a community or individual, we send only transactional onboarding
+                    invitations for the sole purpose of facilitating access.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Safari fallback: redirect non-www to www
+        if (window.location.hostname === 'badactoridentifier.com') {
+            window.location.replace('https://www.badactoridentifier.com' + window.location.pathname + window.location.search);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some subtle animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.problem-card, .solution-card, .user-card, .trust-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
