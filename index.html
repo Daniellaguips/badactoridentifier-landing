@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Safety Reporting &amp; Member Vetting Platform | Bad Actor Identifier</title>
-    <meta name="description" content="Report concerning behavior confidentially. Community leaders vet new members with AI-assisted tools and see safety patterns across trusted networks. Free beta — join the founding network.">
+    <meta name="description" content="Report concerning behavior confidentially. Community leaders vet new members with AI-assisted tools and see safety patterns across trusted networks. A free non-profit community safety service — join the founding network.">
     <link rel="canonical" href="https://www.badactoridentifier.com/">
     <meta name="theme-color" content="#1c1c1c">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Bad Actor Identifier — Community Safety Reporting &amp; Vetting">
-    <meta property="og:description" content="Privacy-first safety reporting for communities. Confidential reports, cross-community pattern detection, and AI-assisted member vetting. Join the founding network.">
+    <meta property="og:description" content="Free non-profit community safety service. Confidential reports, cross-community blacklist checks, and AI-assisted member vetting. Join the founding network.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.badactoridentifier.com/">
     <meta property="og:image" content="https://www.badactoridentifier.com/og-image.png">
@@ -20,7 +20,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bad Actor Identifier — Community Safety Reporting &amp; Vetting">
-    <meta name="twitter:description" content="Privacy-first safety reporting for communities. Confidential reports, cross-community pattern detection, and AI-assisted member vetting.">
+    <meta name="twitter:description" content="Free non-profit community safety service. Confidential reports, cross-community blacklist checks, and AI-assisted member vetting.">
     <meta name="twitter:image" content="https://www.badactoridentifier.com/og-image.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,10 +59,10 @@
             },
             {
                 "@type": "Question",
-                "name": "Is this free during beta?",
+                "name": "Is this free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. Core reporting features are free during the beta period. AI-assisted vetting is a premium feature, also free during beta. Your feedback directly shapes development priorities."
+                    "text": "Yes — everything is free. Bad Actor Identifier is a non-profit community safety service. Every feature, including AI-assisted vetting, is available at no cost to communities and reporters. Your feedback directly shapes what we build next."
                 }
             },
             {
@@ -158,6 +158,9 @@
             font-size: 14px; transition: color 0.2s ease;
         }
         .nav-links a:hover { color: var(--gray-900); }
+        /* Keep the nav CTA legible — higher-specificity selector overrides .nav-links a */
+        .nav-links a.btn-primary,
+        .nav-links a.btn-primary:hover { color: var(--white); }
 
         /* Mobile hamburger */
         .mobile-menu-btn {
@@ -480,15 +483,40 @@
         .ai-vetting-note {
             text-align: center; margin-top: 28px; font-size: 13px; color: var(--gray-500);
         }
-        .ai-vetting-note .premium-badge {
-            display: inline-block; background: var(--warning-bg); color: #92400e;
-            padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;
-            vertical-align: middle; margin-right: 6px;
-        }
 
         @media (max-width: 768px) {
             .ai-vetting-grid { grid-template-columns: 1fr; }
             .vetting-col { padding: 24px 20px; }
+        }
+
+        /* Share Section */
+        .share-section { background: var(--white); }
+        .share-buttons {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        .share-btn {
+            padding: 12px 20px; font-size: 14px;
+        }
+        .share-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .share-btn.whatsapp {
+            background: #25D366; color: white; border: 1px solid #25D366;
+        }
+        .share-btn.whatsapp:hover {
+            background: #1ebe5a; border-color: #1ebe5a; color: white;
+        }
+        .share-toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background: var(--gray-900); color: white; padding: 12px 20px;
+            border-radius: 8px; font-size: 14px; font-weight: 500;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+            z-index: 200;
+        }
+        .share-toast.visible { opacity: 1; }
+        @media (max-width: 768px) {
+            .share-buttons { flex-direction: column; align-items: stretch; max-width: 320px; margin-left: auto; margin-right: auto; }
+            .share-btn { justify-content: center; }
         }
 
         /* Footer */
@@ -545,8 +573,6 @@
             .hero { padding: 56px 0 40px; }
             .hero h1 { font-size: 30px; }
             .hero .subtitle { font-size: 16px; }
-            .hero-capture { flex-direction: column; }
-            .hero-capture .btn-primary { width: 100%; justify-content: center; }
             .hero-split { grid-template-columns: 1fr; }
             .hero-card { padding: 28px 24px; }
             .trust-bar { flex-direction: column; gap: 10px; padding: 16px; }
@@ -646,7 +672,7 @@
                 </span>
                 <span class="trust-bar-item" role="listitem">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                    Open Source
+                    Open Source <span style="font-size:11px;opacity:0.75;margin-left:2px;">(at launch, once ready)</span>
                 </span>
             </div>
         </div>
@@ -722,7 +748,11 @@
                         </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-                            No shared context — you only see what you have
+                            No way to tell if an applicant has been blacklisted by other communities
+                        </li>
+                        <li>
+                            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+                            No photo verification &mdash; anyone can claim to be anyone
                         </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
@@ -736,14 +766,22 @@
                         <div class="vetting-col-badge">✓</div>
                         <span class="vetting-col-label">With AI</span>
                     </div>
-                    <ul class="vetting-list" aria-label="With AI vetting">
+                    <ul class="vetting-list" aria-label="With Bad Actor Identifier">
+                        <li>
+                            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            BAI automatically cross-checks every applicant against people blacklisted by other communities
+                        </li>
+                        <li>
+                            <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            Every applicant must pass a live photo face-match check before they can even apply
+                        </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                             AI builds an enhanced bio from applicant info
                         </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                            Clear applicants are auto-approved — no time wasted
+                            Clear applicants are auto-approved &mdash; no time wasted
                         </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -751,14 +789,13 @@
                         </li>
                         <li>
                             <svg class="li-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                            You always keep final say — AI assists, never decides
+                            You always keep final say &mdash; AI assists, never decides
                         </li>
                     </ul>
                 </div>
             </div>
             <p class="ai-vetting-note">
-                <span class="premium-badge">PREMIUM &mdash; FREE IN BETA</span>
-                Available to community leaders during the founding beta period.
+                Free for all communities &mdash; Bad Actor Identifier is a non-profit community safety service.
             </p>
         </div>
     </section>
@@ -800,10 +837,13 @@
                 <blockquote>"I organize 200+ gatherings a year. I had no way to know if someone flagged at one venue had been flagged at others. This changes that."</blockquote>
                 <cite>&mdash; Beta community leader, events &amp; nightlife (received free beta access)</cite>
                 <div class="proof-meta">
-                    <div><strong>Open Source</strong> Audit the platform code</div>
+                    <div><strong>Non-Profit</strong> Community safety service, free for everyone</div>
                     <div><strong>Legal-First</strong> Designed with attorney guidance</div>
                     <div><strong>Beta</strong> Founding communities shaping v1</div>
                 </div>
+                <p style="font-size:12px;color:var(--gray-500);margin-top:16px;text-align:center;">
+                    Will be released as open source at launch, once ready.
+                </p>
             </div>
         </div>
     </section>
@@ -831,8 +871,8 @@
                     <p>Multiple independent reports are required to surface patterns. Single reports inform but do not determine outcomes. Leaders are accountable through full audit trails, and the platform is open source for public scrutiny.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Is this free during beta?</h3>
-                    <p>Yes. Core reporting features are free during beta. AI-assisted vetting is a premium feature, also free during beta. Your feedback directly shapes what we build next.</p>
+                    <h3>Is this free?</h3>
+                    <p>Yes &mdash; everything is free. Bad Actor Identifier is a non-profit community safety service. Every feature, including AI-assisted vetting, is available at no cost to communities and reporters. Your feedback directly shapes what we build next.</p>
                 </div>
             </div>
         </div>
@@ -887,14 +927,44 @@
                     </form>
                     <div class="form-success" id="form-success" role="status" aria-live="polite">
                         <h3>You're on the list!</h3>
-                        <p>We'll notify you before launch. Know another community leader? Share this page.</p>
+                        <p>We'll notify you before launch. Know another community leader? <a href="#share" style="color:white;text-decoration:underline;">Share this page</a> and help make more communities safer.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Share -->
+    <section id="share" class="section share-section" aria-labelledby="share-heading">
+        <div class="container">
+            <p class="section-label">Spread the Word</p>
+            <h2 id="share-heading" class="section-title">Part of a community? Help make it safer.</h2>
+            <p class="section-subtitle">
+                If you're a member of a group, network, or organization &mdash; share Bad Actor Identifier with your leaders and ask them to adopt it. A safer community starts with one conversation.
+            </p>
+            <div class="share-buttons">
+                <button type="button" class="btn share-btn whatsapp" onclick="shareWhatsapp()" aria-label="Share on WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/></svg>
+                    Share on WhatsApp
+                </button>
+                <button type="button" class="btn btn-secondary share-btn" onclick="shareNative()" aria-label="Share via your device">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    Share&hellip;
+                </button>
+                <button type="button" class="btn btn-secondary share-btn" onclick="copyShareLink(this)" aria-label="Copy share summary and link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy Link
+                </button>
+            </div>
+            <p style="text-align:center;margin-top:28px;font-size:13px;color:var(--gray-500);max-width:540px;margin-left:auto;margin-right:auto;">
+                Perfect for DMs on Instagram, WhatsApp groups, Slack, or anywhere your community talks.
+            </p>
+        </div>
+    </section>
+
     </main>
+
+    <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
@@ -912,8 +982,9 @@
                     <ul>
                         <li><a href="#beta">Join the Waitlist</a></li>
                         <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#ai-vetting">AI Vetting</a></li>
                         <li><a href="#trust">Trust &amp; Safety</a></li>
-                        <li><a href="https://github.com/Daniellaguips/community-vetting-app" target="_blank" rel="noopener noreferrer">Open Source <span class="sr-only">(opens in new tab)</span></a></li>
+                        <li><span style="color:var(--gray-300);font-size:14px;">Open Source <span style="opacity:0.7;">(at launch)</span></span></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -1009,22 +1080,18 @@
         var SB_URL = 'https://ezjhmujomrxojavcpdab.supabase.co/rest/v1/waitlist';
         var SB_KEY = 'sb_publishable_ZQzAGn2nCjM07Cw-aks0_A_VGL8djFw';
 
-        // Hero inline email capture
-        async function submitHeroEmail() {
-            var email = document.getElementById('hero-email').value.trim();
-            if (!email || !email.includes('@')) return;
-
-            try {
-                var resp = await fetch(SB_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Prefer': 'return=minimal' },
-                    body: JSON.stringify({ name: '', email: email, contact_method: 'email' })
-                });
-                if (resp.ok || resp.status === 409) {
-                    document.getElementById('hero-capture').style.display = 'none';
-                    document.getElementById('hero-capture-success').style.display = 'block';
-                }
-            } catch (err) { /* silent fail for hero — full form is below */ }
+        // Validation helpers — stricter than .includes('@') / length checks
+        var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        function isValidEmail(value) {
+            if (!value || value.length > 254) return false;
+            return EMAIL_REGEX.test(value);
+        }
+        function isValidPhone(value) {
+            if (!value) return false;
+            // Count digits only — strip spaces, dashes, parens, plus, dots
+            var digits = value.replace(/\D/g, '');
+            // 7–15 digits covers E.164 and common local formats
+            return digits.length >= 7 && digits.length <= 15;
         }
 
         // Full waitlist form submission
@@ -1039,10 +1106,10 @@
             var email = null, phone = null;
             if (contactMethod === 'email') {
                 email = document.getElementById('wl-email').value.trim();
-                if (!email || !email.includes('@')) { showError('Please enter a valid email.'); return; }
+                if (!isValidEmail(email)) { showError('Please enter a valid email (e.g. you@example.com).'); return; }
             } else {
                 phone = document.getElementById('wl-phone').value.trim();
-                if (!phone || phone.length < 7) { showError('Please enter a valid phone number.'); return; }
+                if (!isValidPhone(phone)) { showError('Please enter a valid phone number with at least 7 digits.'); return; }
                 if (!document.getElementById('sms-consent').checked) {
                     showError('Please consent to receive text messages, or switch to email.');
                     return;
@@ -1080,6 +1147,65 @@
             var el = document.getElementById('form-error');
             el.textContent = msg;
             el.style.display = 'block';
+        }
+
+        // Share helpers
+        var SHARE_URL = 'https://www.badactoridentifier.com/';
+        var SHARE_TITLE = 'Bad Actor Identifier';
+        var SHARE_TEXT = 'Bad Actor Identifier helps communities report concerning behavior and vet new members — with automatic cross-community blacklist checks and photo verification. A free non-profit community safety service, launching Summer 2026.';
+
+        function showShareToast(msg) {
+            var toast = document.getElementById('share-toast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('visible');
+            setTimeout(function() { toast.classList.remove('visible'); }, 2400);
+        }
+
+        function shareWhatsapp() {
+            var text = SHARE_TEXT + '\n\n' + SHARE_URL;
+            var url = 'https://wa.me/?text=' + encodeURIComponent(text);
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        async function shareNative() {
+            var payload = { title: SHARE_TITLE, text: SHARE_TEXT, url: SHARE_URL };
+            if (navigator.share) {
+                try {
+                    await navigator.share(payload);
+                } catch (err) {
+                    // User cancelled or share failed — fall back to copy
+                    if (err && err.name !== 'AbortError') {
+                        copyShareLink();
+                    }
+                }
+            } else {
+                // No native share (desktop) — fall back to copy
+                copyShareLink();
+            }
+        }
+
+        async function copyShareLink() {
+            var text = SHARE_TEXT + '\n\n' + SHARE_URL;
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    // Legacy fallback
+                    var ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.setAttribute('readonly', '');
+                    ta.style.position = 'absolute';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                }
+                showShareToast('Copied! Paste it anywhere to share.');
+            } catch (err) {
+                showShareToast('Copy failed — please copy manually.');
+            }
         }
     </script>
 </body>
